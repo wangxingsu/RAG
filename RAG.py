@@ -13,15 +13,15 @@ from eval.evaluate_rare import save_rare_summary_to_csv
 from eval.saveFile import save_all_summary_to_csv
 from graphConstruct import build_graph_general, build_nbhds_from_graph_fast
 from leiden_clustering import run_leiden_from_custom_graph
-from utils.Path_FileList import fileListAll, pathLocal
+from utils.Path_FileList import fileListDeng, pathLocal
 from utils.aPCA import run_aPCA
 from utils.controlThreads import prepare_env
 from utils.preprocess import preproMain
 
 THREADS = 16
 DATA_PATH = pathLocal
-FILE_LIST = fileListAll
-FILE_LIST_NAME = "All"
+FILE_LIST = fileListDeng
+FILE_LIST_NAME = "Deng"
 
 def run_one_config(s1_with_rag: bool, s2_with_rag: bool) -> None:
     # Keep only fields used by this script.
