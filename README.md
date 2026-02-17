@@ -1,9 +1,5 @@
 # RAG
 
-Source code for the paper:
-
-**RAG: A Regularised Adaptive Graph-based Method for Rare-Cell Identification from Single-Cell Expression Data**
-
 ## Overview
 
 RAG is a graph-based pipeline for rare-cell identification from single-cell expression data.
