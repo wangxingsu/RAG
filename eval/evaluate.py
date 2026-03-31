@@ -1,22 +1,18 @@
 import os
 
-from eval.evaluate_all import evaluate_all_main
 from eval.evaluate_rare import (
     accumulate_rare_summary,
     build_all_cluster_diagnostics,
     evaluate_rare_main,
     save_rare_diagnostics,
 )
-from eval.saveFile import accumulate_all_summary, save_results_to_file
+from eval.saveFile import save_results_to_file
 from utils.getRareType import get_rare_list
 
 
 def evaluate(e, method, result, output_file, output_dir):
     dataset_name = os.path.basename(e)
     title = f"{dataset_name} with {method}"
-
-    all_summary = evaluate_all_main(df=result, true_col="cell_type", pred_col="cluster_id")
-    save_results_to_file(all_summary, filename=output_file, title=f"{title} - All Clustering")
 
     rare_types = get_rare_list(e, result)
     metrics_avg, metrics_per_cluster, identified_rare_info, true_rare_info = evaluate_rare_main(
@@ -38,7 +34,6 @@ def evaluate(e, method, result, output_file, output_dir):
     }
     save_results_to_file(rare_summary, filename=output_file, title=f"{title} - Rare Clustering")
 
-    accumulate_all_summary(dataset_name=dataset_name, method_name=method, all_summary_dict=all_summary)
     accumulate_rare_summary(dataset_name=dataset_name, method_name=method, rare_summary=rare_summary)
 
     dataset_tag = dataset_name.replace(".", "_")

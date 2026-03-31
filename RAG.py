@@ -10,7 +10,6 @@ from shannonca.dimred import reduce
 
 from eval.evaluate import evaluate
 from eval.evaluate_rare import save_rare_summary_to_csv
-from eval.saveFile import save_all_summary_to_csv
 from graphConstruct import build_graph_general, build_nbhds_from_graph_fast
 from leiden_clustering import run_leiden_from_custom_graph
 from utils.Path_FileList import fileListAll, pathLocal
@@ -117,7 +116,6 @@ def run_one_config(s1_with_rag: bool, s2_with_rag: bool) -> None:
         del adata, s1_graph, s2_graph, result, X, X_pca, X_sca, nbhds
         gc.collect()
 
-    save_all_summary_to_csv(f"{output_dir}/evaluation_summary_all_{method}.csv")
     save_rare_summary_to_csv(f"{output_dir}/evaluation_summary_rare_{method}.csv")
 
 
