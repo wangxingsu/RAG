@@ -1,6 +1,12 @@
-# RAG
+# RAG - rare cell identification tool from single-cell RNA sequencing data in Python (名字-功能介绍)
 
-RAG is a Regularised Adaptive Graph-based method for rare-cell identification from single-cell expression data. Its core module, the RAG operator, constructs regularised adaptive graphs by combining Euclidean/cosine candidate-neighbour construction, cell-specific radius-based adjacency control, and locally scaled hybrid affinity assignment. The resulting graphs are used for Wilcoxon-based representation learning and Leiden clustering.
+## Introduction
+（三句话：RAG算法流程，主要特点，输入输出）
+RAG is a regularised adaptive graph-based tool for rare-cell identification from single-cell RNA-seq data.
+It first preprocesses and denoises data via PCA, learns an information-theoretic representation using the first regularised adaptive graph, and performs Leiden clustering with the second adaptive graph to obtain robust rare-cell clusters.
+Its core module, the RAG operator, constructs regularised adaptive graphs by combining Euclidean/cosine candidate-neighbour construction, cell-specific radius-based adjacency control, and locally scaled hybrid affinity assignment.
+It supports standard scRNA-seq expression matrices and AnnData objects as input, outputs cell cluster labels, rare-cell lists and visualisation results, and is compatible with multi-sample and batch-corrected data for large-scale and highly imbalanced single-cell analyses.
+![overview](./overview.jpg)
 
 ## Repository Contents
 
