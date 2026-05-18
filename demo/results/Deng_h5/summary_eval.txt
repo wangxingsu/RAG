@@ -1,0 +1,9 @@
+## Deng.h5 with RAG - Rare Clustering
+f1: 0.8666666666666666
+precision: 1.0
+IdentifiedRareTypeCount: 5
+TrueRareTypeCount: 5
+RareTypeCoverage: 1.0
+IdentifiedRareTypes: ['4cell', 'early2cell', 'late2cell', 'mid2cell', 'zy']
+TrueRareTypes: ['4cell', 'early2cell', 'late2cell', 'mid2cell', 'zy']
+

@@ -1,0 +1,6 @@
+Dataset,Method,cluster_id,rare_type,cluster_dominant,tp,fp,fn,tn,cluster_size,rare_size,f1,precision
+Deng.h5,RAG,11,4cell,4cell,7,0,7,239,7,14,0.6666666666666666,1.0
+Deng.h5,RAG,9,early2cell,early2cell,8,0,0,245,8,8,1.0,1.0
+Deng.h5,RAG,12,late2cell,late2cell,7,0,0,246,7,7,1.0,1.0
+Deng.h5,RAG,18,mid2cell,mid2cell,6,0,6,241,6,12,0.6666666666666666,1.0
+Deng.h5,RAG,23,zy,zy,4,0,0,249,4,4,1.0,1.0

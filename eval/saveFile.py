@@ -12,8 +12,8 @@ OUTPUT_EXCLUDED_KEYS = {
 }
 
 
-def save_results_to_file(result_dict, filename="evaluation_results.txt", title=None):
-    with open(filename, 'a') as f:
+def save_results_to_file(result_dict, filename="evaluation_results.txt", title=None, mode="a"):
+    with open(filename, mode) as f:
         if title:
             f.write(f"## {title}\n")
         for k, v in result_dict.items():

@@ -62,6 +62,7 @@ def run_one_dataset(
     print("Step 6/6: save cluster labels and rare-cell diagnostics")
     result = adata.obs[["cell_type", "rc.cluster_init"]].rename(columns={"rc.cluster_init": "cluster_id"})
     result.to_csv(dataset_output_dir / "cluster_assignments.csv")
+    adata.write_h5ad(dataset_output_dir / f"{input_file.stem}_clustered.h5ad")
 
     evaluate(
         dataset_name,
@@ -143,7 +144,10 @@ def main():
             gamma=args.gamma,
         )
 
-    save_rare_summary_to_csv(str(output_dir / "demo_summary_rare.csv"))
+    save_rare_summary_to_csv(
+        str(output_dir / "demo_summary_rare.csv"),
+        merge_existing=args.dataset != "all",
+    )
     print(f"\nDemo summary written to {output_dir / 'demo_summary_rare.csv'}")
 
 

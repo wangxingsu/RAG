@@ -26,8 +26,20 @@ def accumulate_rare_summary(dataset_name, method_name, rare_summary):
     summary_rare_rows.append({"Dataset": dataset_name, "Method": method_name, **rare_summary})
 
 
-def save_rare_summary_to_csv(filename="evaluation_summary_rare.csv"):
+def save_rare_summary_to_csv(filename="evaluation_summary_rare.csv", merge_existing=False):
     df = pd.DataFrame(summary_rare_rows)
+    if merge_existing and not df.empty:
+        try:
+            existing = pd.read_csv(filename)
+        except FileNotFoundError:
+            existing = pd.DataFrame()
+        if not existing.empty:
+            key_cols = ["Dataset", "Method"]
+            if all(col in existing.columns for col in key_cols) and all(col in df.columns for col in key_cols):
+                existing_keys = existing[key_cols].astype(str).agg("\t".join, axis=1)
+                new_keys = set(df[key_cols].astype(str).agg("\t".join, axis=1))
+                existing = existing.loc[~existing_keys.isin(new_keys)]
+            df = pd.concat([existing, df], ignore_index=True)
     df = drop_output_excluded_columns(df)
     df.to_csv(filename, index=False)
 

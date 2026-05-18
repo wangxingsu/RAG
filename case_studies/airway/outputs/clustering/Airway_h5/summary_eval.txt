@@ -1,0 +1,9 @@
+## Airway.h5 with RAG - Rare Clustering
+f1: 0.7412653358903561
+precision: 0.8903846153846153
+IdentifiedRareTypeCount: 4
+TrueRareTypeCount: 4
+RareTypeCoverage: 1.0
+IdentifiedRareTypes: ['Goblet', 'Ionocyte', 'Neuroendocrine', 'Tuft']
+TrueRareTypes: ['Goblet', 'Ionocyte', 'Neuroendocrine', 'Tuft']
+

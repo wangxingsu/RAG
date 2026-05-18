@@ -10,6 +10,10 @@ The core module is the RAG operator, which constructs regularised adaptive graph
 
 This repository provides a demo workflow for bundled scRNA-seq HDF5 datasets. The implementation uses Scanpy AnnData internally and outputs cell cluster assignments, rare-cluster evaluation summaries, and diagnostic tables.
 
+![Overview of RAG](assets/overview1.png)
+
+**Overview of RAG.** Blue and red points denote dominant and rare cells, respectively, and dashed circles indicate cell-specific radius. **a** A fixed-size neighbourhood graph selects a fixed number of nearest cells as candidate neighbours. **b** A regularised adaptive graph, constructed by averaging hybrid dissimilarities among candidate neighbours to define the cell-specific radius, retains effective neighbours. **c** Standard preprocessing, including quality control and principal component analysis, produces a PCA representation of cells. **d** With the input of PCA representation, RAG operator constructs the first regularised adaptive graph and derives neighbourhoods for Wilcoxon-based surprisal component analysis, yielding an information-theoretic representation. **e** With the input of information-theoretic representation, the RAG operator constructs the second regularised adaptive graph for Leiden community detection.
+
 ## Installation
 
 Create a clean Python environment and install the dependencies:
@@ -51,6 +55,8 @@ Main output files include:
 
 ```
 demo/results/*/cluster_assignments.csv
+demo/results/*/*_clustered.h5ad
+demo/results/*/summary_eval.txt
 demo/results/demo_summary_rare.csv
 demo/results/*/rare_diagnostics_*_RAG.csv
 demo/results/*/all_clusters_diagnostics_*_RAG.csv
@@ -64,9 +70,17 @@ The evaluation outputs report:
 
 The diagnostic files can be used to inspect rare-cell recovery, cluster composition, and candidate rare clusters.
 
+## Airway case study
+
+An optional Airway case-study workflow is provided in `case_studies/airway/`. It runs Airway RAG clustering, performs differential expression, computes RPS marker-uniqueness ranking, and generates the Airway UMAP plus top-marker panel used for downstream interpretation.
+
+```powershell
+cd case_studies/airway
+.\run_airway_all.ps1
+```
+
 ## Repository contents
 
-```markdown
 - `RAG.py`: entry point for running RAG on demo datasets.
 - `graphConstruct.py`: implementation of the RAG graph-construction operator.
 - `leiden_clustering.py`: Leiden clustering on the graph constructed by the RAG operator.
@@ -74,11 +88,7 @@ The diagnostic files can be used to inspect rare-cell recovery, cluster composit
 - `utils/aPCA.py`: PCA dimensionality reduction.
 - `eval/`: rare-cell evaluation utilities.
 - `demo/`: bundled demo datasets and output directory.
-```
-
-## License
-
-This project is released under the GPL-3.0 License.
+- `case_studies/airway/`: optional Airway case-study workflow.
 
 ## Contact
 

@@ -1,0 +1,2 @@
+Dataset,Method,f1,precision,IdentifiedRareTypeCount,TrueRareTypeCount,RareTypeCoverage,IdentifiedRareTypes,TrueRareTypes
+Airway.h5,RAG,0.7412653358903561,0.8903846153846153,4,4,1.0,"['Goblet', 'Ionocyte', 'Neuroendocrine', 'Tuft']","['Goblet', 'Ionocyte', 'Neuroendocrine', 'Tuft']"

@@ -1,0 +1,3 @@
+Dataset,Method,f1,precision,IdentifiedRareTypeCount,TrueRareTypeCount,RareTypeCoverage,IdentifiedRareTypes,TrueRareTypes
+Deng.h5,RAG,0.8666666666666666,1.0,5,5,1.0,"['4cell', 'early2cell', 'late2cell', 'mid2cell', 'zy']","['4cell', 'early2cell', 'late2cell', 'mid2cell', 'zy']"
+Airway.h5,RAG,0.7412653358903561,0.8903846153846153,4,4,1.0,"['Goblet', 'Ionocyte', 'Neuroendocrine', 'Tuft']","['Goblet', 'Ionocyte', 'Neuroendocrine', 'Tuft']"

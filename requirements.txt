@@ -1,10 +1,10 @@
 numpy
 scipy
 pandas
+matplotlib
 scikit-learn
 scanpy
 h5py
 python-igraph
 leidenalg
 shannonca
-

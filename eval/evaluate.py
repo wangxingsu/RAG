@@ -32,7 +32,7 @@ def evaluate(e, method, result, output_file, output_dir):
         "IdentifiedRareTypes": identified_rare_info["types"],
         "TrueRareTypes": true_rare_info["types"],
     }
-    save_results_to_file(rare_summary, filename=output_file, title=f"{title} - Rare Clustering")
+    save_results_to_file(rare_summary, filename=output_file, title=f"{title} - Rare Clustering", mode="w")
 
     accumulate_rare_summary(dataset_name=dataset_name, method_name=method, rare_summary=rare_summary)
 
