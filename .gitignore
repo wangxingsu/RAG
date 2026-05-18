@@ -13,3 +13,5 @@ demo/tmp_verify_output/
 Thumbs.db
 
 *.log
+
+.idea/
