@@ -1,15 +1,13 @@
-# RAG
+# RAG - rare cell identification tool from single-cell RNA sequencing data in Python (名字-功能介绍)
 
-RAG is a Regularised Adaptive Graph-based method for rare-cell identification from single-cell expression data. Its core module, the RAG operator, constructs regularised adaptive graphs by combining Euclidean/cosine candidate-neighbour construction, cell-specific radius-based adjacency control, and locally scaled hybrid affinity assignment. The resulting graphs are used for Wilcoxon-based representation learning and Leiden clustering.
+## Introduction
+（三句话：RAG算法流程，主要特点，输入输出）
+RAG is a regularised adaptive graph-based tool for rare-cell identification from single-cell RNA-seq data.
+It first preprocesses and denoises data via PCA, learns an information-theoretic representation using the first regularised adaptive graph, and performs Leiden clustering with the second adaptive graph to obtain robust rare-cell clusters.
+Its core module, the RAG operator, constructs regularised adaptive graphs by combining Euclidean/cosine candidate-neighbour construction, cell-specific radius-based adjacency control, and locally scaled hybrid affinity assignment.
+It supports standard scRNA-seq expression matrices and AnnData objects as input, outputs cell cluster labels, rare-cell lists and visualisation results, and is compatible with multi-sample and batch-corrected data for large-scale and highly imbalanced single-cell analyses.
+![overview](./overview.jpg)
 
-## Repository Contents
-
-- `RAG.py`: entry point for running the demo datasets.
-- `graphConstruct.py`: implementation of the RAG graph-construction operator.
-- `leiden_clustering.py`: Leiden clustering on the RAG-constructed graph.
-- `utils/preprocess.py`: data loading, quality control, normalisation, log transformation, highly variable gene selection, and PCA.
-- `eval/`: rare-cell evaluation utilities.
-- `demo/`: bundled demo datasets and output directory.
 
 ## Installation
 
@@ -21,21 +19,27 @@ conda activate rag
 pip install -r requirements.txt
 ```
 
-If `leidenalg` or `python-igraph` cannot be installed through `pip`, install them with conda:
-
+## Usage
 ```bash
-conda install -c conda-forge python-igraph leidenalg
+python3 RAG.py --dataset <dataset>
 ```
 
-## Demo Datasets
+Main Parameters (这些都是用户可以自己设置的嘛？不是的话，要不就不写了？如果是的话，需要在Usage部分写详细的用法）
+- `tau_PCA`: cumulative explained-variance threshold for PCA, default `0.9`.
+- `rho_M`: candidate-neighbour ratio, default `0.005`.
+- `M_min`: lower bound of the candidate-neighbour count, default `5`.
+- `alpha`: Euclidean/cosine hybrid dissimilarity weight, default `0.5`.
+- `eta`: radius bias-correction constant, default `1.0`.
+- `gamma`: Leiden resolution parameter, default `1.0`.
 
-Two real scRNA-seq demo datasets are included:
+## Demo
+### Dataset
+There are two datasets are included:
 
 ```text
 demo/data/Deng.h5
 demo/data/Airway.h5
 ```
-
 Each HDF5 file follows the same layout:
 
 - `expression_data`: cell-by-gene count matrix
@@ -43,25 +47,21 @@ Each HDF5 file follows the same layout:
 - `cell_type`: reference cell-type labels
 - `gene_names`: gene names
 
-## Running the Demo
-
-Run RAG on both demo datasets:
+### Run RAG on a dataset:
 
 ```bash
-python RAG.py
+python3 RAG.py --dataset deng
+python3 RAG.py --dataset airway
 ```
+这里不加参数默认就跑两个，有点神奇了。
+默认是跑demo/data目录下的所有h5文件嘛？
+可以改成，跑指定文件不？而且需要输入全部路径，比如：
+python3 RAG.py --dataset /demo/data/Deng.h5
 
-Run one dataset only:
 
-```bash
-python RAG.py --dataset deng
-python RAG.py --dataset airway
-```
+### Outputs
 
 The demo workflow includes data loading, quality control, normalisation, log transformation, highly variable gene selection, PCA, RAG graph construction, Wilcoxon-based representation learning, Leiden clustering, and rare-cell evaluation.
-
-## Outputs
-
 Results are written to `demo/results/`. The main output files include:
 
 ```text
@@ -75,11 +75,21 @@ demo/results/*/all_clusters_diagnostics_*_RAG.csv
 
 The evaluation outputs report precision, F1 score, and rare-type coverage rate (RCR / `RareTypeCoverage`).
 
-## Main Parameters
+## Repository Contents
 
-- `tau_PCA`: cumulative explained-variance threshold for PCA, default `0.9`.
-- `rho_M`: candidate-neighbour ratio, default `0.005`.
-- `M_min`: lower bound of the candidate-neighbour count, default `5`.
-- `alpha`: Euclidean/cosine hybrid dissimilarity weight, default `0.5`.
-- `eta`: radius bias-correction constant, default `1.0`.
-- `gamma`: Leiden resolution parameter, default `1.0`.
+- `RAG.py`: entry point for running the demo datasets.
+- `graphConstruct.py`: implementation of the RAG graph-construction operator.
+- `leiden_clustering.py`: Leiden clustering on the RAG-constructed graph.
+- `utils/preprocess.py`: data loading, quality control, normalisation, log transformation, highly variable gene selection, and PCA.
+- `eval/`: rare-cell evaluation utilities.
+- `demo/`: bundled demo datasets and output directory.
+
+## Lcience
+
+This project is covered under the GPL-3.0 License. 这个是最宽松的证书，改个别的也好
+
+## Contact
+If any questions, please do not hesitate to contact us at:
+
+Xingsu Wang, wangxingsu@gdiist.cn
+
